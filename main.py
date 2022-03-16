@@ -363,6 +363,12 @@ def add_parser_arguments(parser, skip_arch=False):
         type=int,
     )
 
+    parser.add_argument(
+        "--model",
+        type=str,
+        default="resnet101"
+    )
+
 
 def prepare_for_training(args, model_args, model):
     args.distributed = False
@@ -668,8 +674,12 @@ def main(args, model_args, model_arch):
     
     # model.load_state_dict(dict_new)
 
-    exit_list =[1,4,7,10,13,16,19,22,25,28,31,33]
-    model = ResNetwthMultiExit(exit_list=exit_list)
+    if args.model is 'resnet101':
+        exit_list =[1,4,7,10,13,16,19,22,25,28,31,33]
+        model = ResNetwthMultiExit(exit_list=exit_list)
+    elif args.model is 'swin':
+        # TODO: add swin
+        pass
 
     (
         trainer,
